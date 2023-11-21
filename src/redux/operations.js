@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addData, deleteData, getData } from 'API/api';
+import { addData, createUser, deleteData, getData, login } from 'API/api';
 
 export const fetchContacts = createAsyncThunk(
   'fetchContacts',
@@ -28,6 +28,30 @@ export const deleteContact = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       return await deleteData(id);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+//User
+
+export const registerUser = createAsyncThunk(
+  'registerUser',
+  async (userInfo, thunkAPI) => {
+    try {
+      return await createUser(userInfo);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const logInUser = createAsyncThunk(
+  'logInUser',
+  async (userInfo, thunkAPI) => {
+    try {
+      return await login(userInfo);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
