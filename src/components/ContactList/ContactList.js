@@ -40,7 +40,7 @@ export const ContactList = () => {
           </thead>
 
           <tbody>
-            {contacts?.map(contact => (
+            {contacts.map(contact => (
               <tr key={contact.id}>
                 <StyledTd>{contact.name}</StyledTd>
                 <StyledTd>{contact.phone}</StyledTd>
