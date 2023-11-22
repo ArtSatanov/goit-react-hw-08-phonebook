@@ -2,6 +2,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+export const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
 //Contacts
 
 export async function getData() {
@@ -42,7 +50,12 @@ export async function login(userInfo) {
 //   "password": "string"
 // }
 
-export async function login() {
+export async function logOut() {
+  const response = await axios.post('/users/logout');
+  return response.data;
+}
+
+export async function getUserInfo() {
   const response = await axios.get('/users/current');
   return response.data;
 }

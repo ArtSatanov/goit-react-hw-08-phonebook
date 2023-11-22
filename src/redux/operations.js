@@ -1,5 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addData, createUser, deleteData, getData, login } from 'API/api';
+import {
+  addData,
+  createUser,
+  deleteData,
+  getData,
+  getUserInfo,
+  login,
+  setAuthHeader,
+  clearAuthHeader,
+  logOut,
+} from 'API/api';
 
 export const fetchContacts = createAsyncThunk(
   'fetchContacts',
@@ -52,6 +62,35 @@ export const logInUser = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     try {
       return await login(userInfo);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const refreshUser = createAsyncThunk(
+  'refreshUser',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      setAuthHeader(persistedToken);
+      return await getUserInfo();
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const logOutUser = createAsyncThunk(
+  'logOutUser',
+  async (_, thunkAPI) => {
+    try {
+      logOut();
+      clearAuthHeader();
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
