@@ -3,7 +3,7 @@ import { logOutUser } from 'redux/operations';
 import { selectUser } from 'redux/selectors';
 
 export const LogOut = () => {
-  const { name } = useSelector(selectUser);
+  const { email } = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const handlerClick = () => {
@@ -11,7 +11,7 @@ export const LogOut = () => {
   };
   return (
     <div>
-      <p>Hi, {name}</p>
+      <p>Hi, {email}</p>
       <button type="button" onClick={handlerClick}>
         LogOut
       </button>
