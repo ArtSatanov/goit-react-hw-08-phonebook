@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { registerUser } from 'redux/operations';
 import * as Yup from 'yup';
@@ -37,12 +37,15 @@ export const SignUpFrom = () => {
         <Form>
           <label htmlFor="name">Name</label>
           <Field id="name" name="name" placeholder="Jane" />
+          <ErrorMessage name="name" />
 
           <label htmlFor="email">Email</label>
           <Field id="email" name="email" placeholder="email" type="email" />
+          <ErrorMessage name="email" />
 
           <label htmlFor="password">Last Name</label>
           <Field id="password" name="password" placeholder="password" />
+          <ErrorMessage name="password" />
 
           <button type="submit">Sign Up</button>
         </Form>
