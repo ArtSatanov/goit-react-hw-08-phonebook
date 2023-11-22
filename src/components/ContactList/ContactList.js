@@ -43,7 +43,7 @@ export const ContactList = () => {
             {contacts.map(contact => (
               <tr key={contact.id}>
                 <StyledTd>{contact.name}</StyledTd>
-                <StyledTd>{contact.phone}</StyledTd>
+                <StyledTd>{contact.number}</StyledTd>
                 <StyledTd>
                   <button onClick={() => dispatch(deleteContact(contact.id))}>
                     Delete
