@@ -1,10 +1,10 @@
-import { Formik } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import { useDispatch } from 'react-redux';
+import { logInUser } from 'redux/operations';
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string()
-.email('Invalid email')
-    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .min(9, 'Too Short!')
     .max(15, 'Too Long!')
@@ -12,40 +12,32 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginForm = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-   const handleSubmit = (values, action) => {
-    
-      dispatch(logInUser(values));
-      action.resetForm();
-
+  const handleSubmit = (values, action) => {
+    dispatch(logInUser(values));
+    action.resetForm();
   };
 
-   return (
-     <div>
-    <h1>LOGIN</h1>
-    <Formik
-      initialValues={{
-        email: '',
-        password: '',
-            }}
-                  validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-
-
-        <label htmlFor="email">Email</label>
-        <Field
-          id="email"
-          name="email"
-          placeholder="email"
-          type="email"
-               />
-                       <label htmlFor="password">Password</label>
-        <Field id="password" name="password" placeholder="password" />
-        <button type="submit">Log in</button>
-      </Form>
-    </Formik>
-  </div>
-) };
+  return (
+    <div>
+      <h1>LOGIN</h1>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <label htmlFor="email">Email</label>
+          <Field id="email" name="email" placeholder="email" type="email" />
+          <label htmlFor="password">Password</label>
+          <Field id="password" name="password" placeholder="password" />
+          <button type="submit">Log in</button>
+        </Form>
+      </Formik>
+    </div>
+  );
+};
