@@ -1,16 +1,37 @@
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { FilterBar } from './FilterBar/FilterBar';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/operations';
+import { useAuth } from 'redux/selectors';
 
 export const App = () => {
-  return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-      <h2>Contacts</h2>
-      <FilterBar />
-      <ContactList />
-    </div>
+  useEffect(() => { dispatch(refreshUser()); }, [dispatch]);
+
+  return isRefreshing ? <p>Refreshing user...</p> :(
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/tasks" component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <PrivateRoute redirectTo="/login" component={<TasksPage />} />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
