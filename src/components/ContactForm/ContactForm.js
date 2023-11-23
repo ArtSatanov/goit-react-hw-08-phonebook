@@ -6,6 +6,7 @@ import {
   StyledField,
   StyledLabel,
   ErrMsg,
+  StyledAdd,
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/operations';
@@ -60,7 +61,7 @@ export const ContactForm = () => {
           <StyledField id="number" name="number" placeholder="***-**-**" />
           <ErrMsg component="div" name="number" />
         </StyledLabel>
-        <button type="submit">Add contact</button>
+        <StyledAdd type="submit">Add contact</StyledAdd>
       </StyledForm>
     </Formik>
   );
