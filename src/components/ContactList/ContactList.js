@@ -19,17 +19,18 @@ export const ContactList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    const controller = new AbortController();
+    dispatch(fetchContacts(controller.signal));
+    return () => {
+      controller.abort();
+    };
   }, [dispatch]);
 
   return (
     <div>
       {isLoading && <Loader />}
-      {error && (
-        <Error msg={'Something went wrong! Please reaload the page! '} />
-      )}
 
-      {!isLoading && !error && (
+      {!isLoading && !error && contacts.length !== 0 && (
         <StyledTb>
           <thead>
             <tr>
@@ -53,6 +54,9 @@ export const ContactList = () => {
             ))}
           </tbody>
         </StyledTb>
+      )}
+      {error && (
+        <Error msg={'Something went wrong! Please reaload the page! '} />
       )}
     </div>
   );

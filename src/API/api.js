@@ -12,8 +12,8 @@ export const clearAuthHeader = () => {
 
 //Contacts
 
-export async function getData() {
-  const response = await axios.get('/contacts');
+export async function getData(signal) {
+  const response = await axios.get('/contacts', { signal });
   return response.data;
 }
 

@@ -13,9 +13,9 @@ import {
 
 export const fetchContacts = createAsyncThunk(
   'fetchContacts',
-  async (_, thunkAPI) => {
+  async (signal, thunkAPI) => {
     try {
-      return await getData();
+      return await getData(signal);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -50,7 +50,9 @@ export const registerUser = createAsyncThunk(
   'registerUser',
   async (userInfo, thunkAPI) => {
     try {
-      return await createUser(userInfo);
+      const userData = await createUser(userInfo);
+      setAuthHeader(userData.token);
+      return userData;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -61,7 +63,9 @@ export const logInUser = createAsyncThunk(
   'logInUser',
   async (userInfo, thunkAPI) => {
     try {
-      return await login(userInfo);
+      const userData = await login(userInfo);
+      setAuthHeader(userData.token);
+      return userData;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
