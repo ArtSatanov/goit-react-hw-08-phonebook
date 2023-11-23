@@ -2,6 +2,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { registerUser } from 'redux/operations';
 import * as Yup from 'yup';
+import {
+  StyledForm,
+  StyledLabel,
+  FormButton,
+  ErrMsg,
+  StyledDiv,
+} from './SignUpForm.styled';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -23,7 +30,7 @@ export const SignUpFrom = () => {
     action.resetForm();
   };
   return (
-    <div>
+    <StyledDiv>
       <h1>Sign Up</h1>
       <Formik
         initialValues={{
@@ -34,22 +41,22 @@ export const SignUpFrom = () => {
         validationSchema={SignUpSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <label htmlFor="name">Name</label>
+        <StyledForm>
+          <StyledLabel htmlFor="name">Name</StyledLabel>
           <Field id="name" name="name" placeholder="Jane" />
-          <ErrorMessage name="name" />
+          <ErrMsg name="name" />
 
-          <label htmlFor="email">Email</label>
+          <StyledLabel htmlFor="email">Email</StyledLabel>
           <Field id="email" name="email" placeholder="email" type="email" />
-          <ErrorMessage name="email" />
+          <ErrMsg name="email" />
 
-          <label htmlFor="password">Last Name</label>
+          <StyledLabel htmlFor="password">Last Name</StyledLabel>
           <Field id="password" name="password" placeholder="password" />
-          <ErrorMessage name="password" />
+          <ErrMsg name="password" />
 
-          <button type="submit">Sign Up</button>
-        </Form>
+          <FormButton type="submit">Sign Up</FormButton>
+        </StyledForm>
       </Formik>
-    </div>
+    </StyledDiv>
   );
 };
