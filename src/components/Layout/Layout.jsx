@@ -4,15 +4,16 @@ import { Loader } from '../Loader/Loader';
 import { LogOut } from 'components/Logout/Logout';
 import { useAuth } from 'redux/selectors';
 import { Navigation } from 'components/Navigation/Navigation';
+import { StyledHeader, StyledDiv } from './Layout.styled';
 
 export const Layout = () => {
   const { isLoggedIn } = useAuth();
   return (
     <div>
-      <header>
-        {isLoggedIn && <Navigation />}
-        {isLoggedIn && <LogOut />}
-      </header>
+      <StyledHeader>
+        <div>{isLoggedIn && <Navigation />}</div>
+        <StyledDiv>{isLoggedIn && <LogOut />}</StyledDiv>
+      </StyledHeader>
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>

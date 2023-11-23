@@ -1,13 +1,13 @@
-import { StyledLink } from './Navigation.styled';
+import { StyledLink, StyledNav } from './Navigation.styled';
 export const Navigation = () => {
   return (
     <div>
-      <nav>
+      <StyledNav>
         <StyledLink to="/" end>
           Home
         </StyledLink>
         <StyledLink to="/phonebook">Contacts</StyledLink>
-      </nav>
+      </StyledNav>
     </div>
   );
 };

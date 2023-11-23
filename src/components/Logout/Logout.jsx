@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser } from 'redux/operations';
 import { selectUser } from 'redux/selectors';
+import { StyledDiv, StyledLogout } from './Logout.styled';
 
 export const LogOut = () => {
   const { email } = useSelector(selectUser);
@@ -10,11 +11,11 @@ export const LogOut = () => {
     dispatch(logOutUser());
   };
   return (
-    <div>
+    <StyledDiv>
       <p>Hi, {email}</p>
-      <button type="button" onClick={handlerClick}>
+      <StyledLogout type="button" onClick={handlerClick}>
         LogOut
-      </button>
-    </div>
+      </StyledLogout>
+    </StyledDiv>
   );
 };
