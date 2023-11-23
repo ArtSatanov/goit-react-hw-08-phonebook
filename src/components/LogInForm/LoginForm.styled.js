@@ -31,7 +31,8 @@ export const FormButton = styled.button`
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
-
+  border-radius: 30px;
+  font-weight: 700;
   &:hover {
     opacity: 1;
   }
@@ -49,12 +50,16 @@ export const StyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
   max-width: 300px;
   border: 1px solid rgba(46, 47, 66, 0.1);
   border-radius: 2%;
   overflow: hidden;
   background-color: white;
-  margin: 0 auto 50px;
+  margin: 10px auto 50px;
+  padding-top: 20px;
   box-shadow: 0 0 10px #c6cccced;
+`;
+
+export const StyledP = styled.p`
+  font-size: 13px;
 `;
