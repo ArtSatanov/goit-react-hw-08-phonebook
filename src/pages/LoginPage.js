@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <div>
       <LoginForm />
-      <p>Don't have an account?</p>
+      <p>Create an account?</p>
       <Link to={'/register'}>Signup</Link>
     </div>
   );
