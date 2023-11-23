@@ -1,6 +1,7 @@
 import { Formik, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { registerUser } from 'redux/operations';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import {
   StyledForm,
@@ -8,6 +9,7 @@ import {
   FormButton,
   ErrMsg,
   StyledDiv,
+  StyledP,
 } from './SignUpForm.styled';
 
 const SignUpSchema = Yup.object().shape({
@@ -50,11 +52,14 @@ export const SignUpFrom = () => {
           <Field id="email" name="email" placeholder="email" type="email" />
           <ErrMsg name="email" />
 
-          <StyledLabel htmlFor="password">Last Name</StyledLabel>
+          <StyledLabel htmlFor="password">Password</StyledLabel>
           <Field id="password" name="password" placeholder="password" />
           <ErrMsg name="password" />
 
           <FormButton type="submit">Sign Up</FormButton>
+          <StyledP>
+            Have an account ? <Link to={'/login'}>Log In</Link>
+          </StyledP>
         </StyledForm>
       </Formik>
     </StyledDiv>

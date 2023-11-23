@@ -59,3 +59,7 @@ export const StyledDiv = styled.div`
   padding-top: 20px;
   box-shadow: 0 0 10px #c6cccced;
 `;
+
+export const StyledP = styled.p`
+  font-size: 13px;
+`;
