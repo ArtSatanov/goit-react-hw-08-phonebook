@@ -10,10 +10,16 @@ export const Layout = () => {
   const { isLoggedIn } = useAuth();
   return (
     <div>
-      <StyledHeader>
-        <div>{isLoggedIn && <Navigation />}</div>
-        <StyledDiv>{isLoggedIn && <LogOut />}</StyledDiv>
-      </StyledHeader>
+      {isLoggedIn && (
+        <StyledHeader>
+          <div>
+            <Navigation />
+          </div>
+          <StyledDiv>
+            <LogOut />
+          </StyledDiv>
+        </StyledHeader>
+      )}
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
